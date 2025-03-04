@@ -1,6 +1,7 @@
 import { TRecord } from "../types";
 
 type TRecordWithoutId = Omit<TRecord, "id">;
+
 export const RecordController = (records: TRecord[]) => ({
   add: (record: TRecord) => {
     return RecordController([...records, record]);
@@ -13,10 +14,15 @@ export const RecordController = (records: TRecord[]) => ({
   },
   filter: (filter: Partial<TRecordWithoutId>) => {
     const filterEntries = Object.entries(filter);
-
-    return records.filter((record) => {
-      return filterEntries.every(([key, value]) => record[key as keyof TRecordWithoutId] === value);
-    });
+    // TODO: filter 기능 수정
+    // 각 filterEntry는 값이 아니라 **배열** 이다
+    return RecordController(
+      records.filter((record) => {
+        return filterEntries.every(
+          ([key, value]) => record[key as keyof TRecordWithoutId] === value,
+        );
+      }),
+    );
   },
   get: () => records,
 });

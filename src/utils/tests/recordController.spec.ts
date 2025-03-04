@@ -61,9 +61,9 @@ describe("RecordController", () => {
 
   it("should filter records based on criteria", () => {
     const controller = RecordController(initialRecords);
-    const filteredRecords = controller.filter({ position: "개발자" });
-    expect(filteredRecords).toHaveLength(1);
-    expect(filteredRecords[0].name).toBe("John Doe");
+    const filteredController = controller.filter({ position: "개발자" });
+    expect(filteredController.get()).toHaveLength(1);
+    expect(filteredController.get()[0].name).toBe("John Doe");
   });
 
   it("should return all records", () => {
