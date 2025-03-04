@@ -1,4 +1,4 @@
-export const getItem = (key: string) => {
+const getItem = (key: string) => {
   try {
     const value = localStorage.getItem(key);
 
@@ -12,7 +12,7 @@ export const getItem = (key: string) => {
   }
 };
 
-export const setItem = <T>(key: string, value: T) => {
+const setItem = <T>(key: string, value: T) => {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
@@ -20,7 +20,7 @@ export const setItem = <T>(key: string, value: T) => {
   }
 };
 
-export const removeItem = (key: string) => {
+const removeItem = (key: string) => {
   try {
     localStorage.removeItem(key);
   } catch (error) {
