@@ -6,11 +6,12 @@ export type TField = {
   required: boolean;
 };
 
+export type TPosition = "개발자" | "PO" | "디자이너";
 export type TRecord = {
   name: string;
   address: string;
   memo: string;
   joinedAt: string;
-  position: "개발자" | "PO" | "디자이너";
+  position: TPosition;
   consentToEmail: boolean;
 };
