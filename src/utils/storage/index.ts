@@ -8,15 +8,13 @@ type TStorage =
     }
   | {
       key: "in-memory";
-      storage: Map<string, TRecord>;
+      storage: Map<string, unknown>;
     };
 
-const storageType: TStorage["key"] = import.meta.env.VITE_STORAGE;
-
-class StorageController {
-  private storageMap: TStorage;
+export class StorageController {
+  public storageMap: TStorage;
   constructor() {
-    if (storageType === "local-storage") {
+    if (import.meta.env.VITE_STORAGE === "local-storage") {
       this.storageMap = {
         key: "local-storage",
         storage: null,
