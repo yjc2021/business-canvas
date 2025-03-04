@@ -13,7 +13,7 @@ type TStorage =
 
 const storageType: TStorage["key"] = import.meta.env.VITE_STORAGE;
 
-class StorageManager {
+class StorageController {
   private storageMap: TStorage;
   constructor() {
     if (storageType === "local-storage") {
@@ -54,4 +54,4 @@ class StorageManager {
   }
 }
 
-export const storage = new StorageManager();
+export const storage = new StorageController();
