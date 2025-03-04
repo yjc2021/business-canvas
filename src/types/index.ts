@@ -8,6 +8,7 @@ export type TField = {
 
 export type TPosition = "개발자" | "PO" | "디자이너";
 export type TRecord = {
+  id: number;
   name: string;
   address: string;
   memo: string;
