@@ -12,7 +12,7 @@ type TStorage =
     };
 
 export class StorageController {
-  public storageMap: TStorage;
+  storageMap: TStorage;
   constructor() {
     if (import.meta.env.VITE_STORAGE === "local-storage") {
       this.storageMap = {
