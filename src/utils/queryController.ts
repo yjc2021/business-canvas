@@ -39,8 +39,7 @@ export class QueryController {
   }
 
   set<T extends keyof Omit<TRecord, "id">>(key: T, value: unknown[]) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (this as any)[key] = value;
+    this[key] = value as this[T];
   }
 
   getParams() {
