@@ -1,4 +1,3 @@
-import { TRecord } from "../../types";
 import { ls } from "./localStorage";
 
 type TStorage =
@@ -27,7 +26,7 @@ export class StorageController {
     }
   }
 
-  setItem(key: string, value: TRecord) {
+  setItem(key: string, value: unknown) {
     if (this.storageMap.key === "local-storage") {
       ls.setItem(key, value);
     } else {
