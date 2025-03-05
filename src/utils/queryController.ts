@@ -1,4 +1,4 @@
-import { TRecord } from "../types";
+import { TPosition, TRecord } from "../types";
 
 export class QueryController {
   name: string[];
@@ -41,6 +41,19 @@ export class QueryController {
   set<T extends keyof Omit<TRecord, "id">>(key: T, value: unknown[]) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this as any)[key] = value;
+  }
+
+  getParams() {
+    const { name, address, memo, joinedAt, position, consentToEmail } = this;
+
+    return {
+      name,
+      address,
+      memo,
+      joinedAt,
+      position: position as TPosition[],
+      consentToEmail,
+    };
   }
 
   private createSearchParamsFor(key: keyof Omit<TRecord, "id">) {
