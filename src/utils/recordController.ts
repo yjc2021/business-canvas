@@ -14,12 +14,15 @@ export const RecordController = (records: TRecord[]) => ({
   update: (id: number, record: TRecordWithoutId) => {
     return RecordController(records.map((r) => (r.id === id ? { ...record, id } : r)));
   },
-  filter: (filter: Partial<TRecordMap>) => {
-    const filterFields = Object.entries(filter);
+  filter: (filter: TRecordMap) => {
+    const filterFields = Object.entries(filter).filter(([, values]) => values.length > 0);
+
     return RecordController(
       records.filter((record) => {
         return filterFields.every(([field, values]) =>
-          values.some((value) => record[field as keyof TRecordWithoutId] === value),
+          (values as (string | boolean)[]).includes(
+            record[field as keyof TRecordWithoutId] as string | boolean,
+          ),
         );
       }),
     );
