@@ -59,11 +59,35 @@ describe("RecordController", () => {
     });
   });
 
-  it("should filter records based on criteria", () => {
-    const controller = RecordController(initialRecords);
-    const filteredController = controller.filter({ position: "개발자" });
-    expect(filteredController.get()).toHaveLength(1);
-    expect(filteredController.get()[0].name).toBe("John Doe");
+  describe("filter", () => {
+    const controller = RecordController([
+      ...initialRecords,
+      {
+        id: 2,
+        name: "Foo Bar",
+        address: "서울 서초구",
+        memo: "한국인",
+        joinedAt: "2024-10-01",
+        position: "PO" as TPosition,
+        consentToEmail: false,
+      },
+    ]);
+    it("should filter records based on single criteria", () => {
+      const positionFilteredController = controller.filter({ position: ["개발자", "PO"] });
+      expect(positionFilteredController.get()).toHaveLength(2);
+      const POFilteredController = controller.filter({ position: ["PO"] });
+      expect(POFilteredController.get()).toHaveLength(1);
+      expect(POFilteredController.get()[0].name).toBe("Foo Bar");
+    });
+
+    it("should filter records based on criteria", () => {
+      const multipleFilteredController = controller.filter({
+        name: ["Foo Bar"],
+        position: ["개발자", "PO"],
+      });
+      expect(multipleFilteredController.get()).toHaveLength(1);
+      expect(multipleFilteredController.get()[0].name).toBe("Foo Bar");
+    });
   });
 
   it("should return all records", () => {
